@@ -24,3 +24,10 @@ message CustomerRequest {
 
   repeated Address addresses = 5;
 }
+
+// Customer response
+message CustomerResponse {
+  int32 id = 1;
+  bool success = 2;
+}
+
