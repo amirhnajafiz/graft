@@ -1,0 +1,9 @@
+syntax = "proto3";
+package customer;
+
+// The customer service definition
+service Customer {
+  rpc GetCustomers(CustomerFilter) returns (stream CustomerRequest) {}
+  rpc CreateCustomer(CustomerRequest) returns (CustomerResponse) {}
+}
+
