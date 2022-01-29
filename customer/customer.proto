@@ -31,3 +31,7 @@ message CustomerResponse {
   bool success = 2;
 }
 
+// Customer filter
+message CustomerFilter {
+  string keyword = 1;
+}
