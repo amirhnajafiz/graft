@@ -3,6 +3,7 @@ package client
 import (
 	"cmd/customer"
 	"context"
+	"google.golang.org/grpc"
 	"io"
 	"log"
 )
@@ -36,4 +37,68 @@ func getCustomers(client customer.CustomerClient, filter *customer.CustomerFilte
 		}
 		log.Printf("Customer: %v", rec)
 	}
+}
+
+func main() {
+	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	if err != nil {
+		log.Fatalf("Did not connect: %v", err)
+	}
+	defer func(conn *grpc.ClientConn) {
+		err := conn.Close()
+		if err != nil {
+			log.Fatalf("Terminated with error: %v", err)
+		}
+	}(conn)
+
+	client := customer.NewCustomerClient(conn)
+
+	temp := &customer.CustomerRequest{
+		Id:    101,
+		Name:  "Amir hossein",
+		Email: "najafi@gmail.com",
+		Phone: "0098913428655",
+		Addresses: []*customer.CustomerRequest_Address{
+			{
+				Street:            "Brad st",
+				City:              "New York",
+				State:             "New York",
+				Zip:               "99810",
+				IsShippingAddress: false,
+			},
+			{
+				Street:            "Taylor st",
+				City:              "New Jersey",
+				State:             "New York",
+				Zip:               "99810",
+				IsShippingAddress: true,
+			},
+		},
+	}
+
+	createCustomer(client, temp)
+
+	temp = &customer.CustomerRequest{
+		Id:    82,
+		Name:  "Linda",
+		Email: "lindi@gmail.com",
+		Phone: "+101 44292",
+		Addresses: []*customer.CustomerRequest_Address{
+			{
+				Street:            "Okyway",
+				City:              "Kora",
+				State:             "Selenoid",
+				Zip:               "12301",
+				IsShippingAddress: false,
+			},
+		},
+	}
+
+	createCustomer(client, temp)
+
+	filter := &customer.CustomerFilter{
+		Keyword: "",
+	}
+
+	getCustomers(client, filter)
 }
