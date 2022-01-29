@@ -44,6 +44,7 @@ func main() {
 
 	s := grpc.NewServer()
 	customer.RegisterCustomerServer(s, &Server{})
+	log.Printf("Attemp to listen on: %s", port)
 	err = s.Serve(lis)
 	if err != nil {
 		log.Fatalf("failed to create server: %v", err)
