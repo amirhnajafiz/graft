@@ -6,6 +6,7 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net"
+	"strings"
 )
 
 const (
@@ -22,6 +23,16 @@ func (s *Server) CreateCustomer(ctx context.Context, in *customer.CustomerReques
 }
 
 func (s *Server) GetCustomers(filter *customer.CustomerFilter, stream customer.Customer_GetCustomersServer) error {
+	for _, savedCustomer := range s.savedCustomers {
+		if filter.Keyword != "" {
+			if !strings.Contains(savedCustomer.Name, filter.Keyword) {
+				continue
+			}
+		}
+		if err := stream.Send(savedCustomer); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
