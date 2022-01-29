@@ -4,7 +4,7 @@
 // 	protoc        v3.19.3
 // source: customer.proto
 
-package __
+package customer
 
 import (
 	context "context"
