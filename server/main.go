@@ -17,7 +17,8 @@ type Server struct {
 }
 
 func (s *Server) CreateCustomer(ctx context.Context, in *customer.CustomerRequest) (*customer.CustomerResponse, error) {
-	return nil, nil
+	s.savedCustomers = append(s.savedCustomers, in)
+	return &customer.CustomerResponse{Id: in.Id, Success: true}, nil
 }
 
 func (s *Server) GetCustomers(filter *customer.CustomerFilter, stream customer.Customer_GetCustomersServer) error {
