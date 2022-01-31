@@ -7,6 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"io"
 	"log"
+	"time"
 )
 
 const (
@@ -42,10 +43,19 @@ func getCustomers(client customer.CustomerClient, filter *customer.CustomerFilte
 }
 
 func main() {
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("Did not connect: %v", err)
+	var conn *grpc.ClientConn
+	var err error
+
+	for {
+		conn, err = grpc.Dial(address, grpc.WithInsecure())
+		if err != nil {
+			time.Sleep(2 * time.Second)
+			fmt.Printf("Did not connect: %v", err)
+		} else {
+			break
+		}
 	}
+
 	defer func(conn *grpc.ClientConn) {
 		err := conn.Close()
 		if err != nil {
