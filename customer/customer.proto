@@ -1,6 +1,7 @@
 syntax = "proto3";
-option go_package = "./";
 package customer;
+
+option go_package = "./";
 
 // The customer service definition
 service Customer {

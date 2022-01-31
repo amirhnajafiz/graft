@@ -59,7 +59,7 @@ func (x *CustomerRequest) ProtoReflect() protoreflect.Message {
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
 		}
-		return ms.New()
+		return ms.Interface().ProtoReflect()
 	}
 	return mi.MessageOf(x)
 }
@@ -136,7 +136,7 @@ func (x *CustomerResponse) ProtoReflect() protoreflect.Message {
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
 		}
-		return ms.New()
+		return ms.Interface().ProtoReflect()
 	}
 	return mi.MessageOf(x)
 }
@@ -191,7 +191,7 @@ func (x *CustomerFilter) ProtoReflect() protoreflect.Message {
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
 		}
-		return ms.New()
+		return ms.Interface().ProtoReflect()
 	}
 	return mi.MessageOf(x)
 }
@@ -242,7 +242,7 @@ func (x *CustomerRequest_Address) ProtoReflect() protoreflect.Message {
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
 		}
-		return ms.New()
+		return ms.Type().Zero()
 	}
 	return mi.MessageOf(x)
 }

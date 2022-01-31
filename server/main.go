@@ -3,7 +3,6 @@ package main
 import (
 	"cmd/customer"
 	"context"
-	"fmt"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -19,7 +18,6 @@ type Server struct {
 }
 
 func (s *Server) CreateCustomer(ctx context.Context, in *customer.CustomerRequest) (*customer.CustomerResponse, error) {
-	fmt.Println(in)
 	s.savedCustomers = append(s.savedCustomers, in)
 	return &customer.CustomerResponse{Id: in.Id, Success: true}, nil
 }

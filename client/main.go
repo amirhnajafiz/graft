@@ -15,7 +15,6 @@ const (
 )
 
 func createCustomer(client customer.CustomerClient, customer *customer.CustomerRequest) {
-	fmt.Println(customer)
 	resp, err := client.CreateCustomer(context.Background(), customer)
 	if err != nil {
 		log.Fatalf("Could not create Customer: %v", err)
@@ -65,7 +64,7 @@ func main() {
 
 	client := customer.NewCustomerClient(conn)
 
-	temp := customer.CustomerRequest{
+	temp := &customer.CustomerRequest{
 		Id:    101,
 		Name:  "Amir hossein",
 		Email: "najafi@gmail.com",
@@ -88,9 +87,9 @@ func main() {
 		},
 	}
 
-	createCustomer(client, &temp)
+	createCustomer(client, temp)
 
-	temp = customer.CustomerRequest{
+	temp = &customer.CustomerRequest{
 		Id:    82,
 		Name:  "Linda",
 		Email: "lindi@gmail.com",
@@ -106,7 +105,7 @@ func main() {
 		},
 	}
 
-	createCustomer(client, &temp)
+	createCustomer(client, temp)
 
 	filter := &customer.CustomerFilter{
 		Keyword: "",
