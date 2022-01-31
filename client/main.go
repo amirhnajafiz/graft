@@ -2,37 +2,18 @@ package main
 
 import (
 	"cmd/customer"
+	"cmd/pkg/data"
 	"context"
 	"fmt"
-	"github.com/bxcodec/faker/v3"
 	"google.golang.org/grpc"
 	"io"
 	"log"
-	"math/rand"
 	"time"
 )
 
 const (
 	address = "localhost:8080"
 )
-
-func fakeClient() *customer.CustomerRequest {
-	return &customer.CustomerRequest{
-		Id:    int32(rand.Int()),
-		Name:  faker.Name(),
-		Email: faker.Email(),
-		Phone: faker.Phonenumber(),
-		Addresses: []*customer.CustomerRequest_Address{
-			{
-				Street:            faker.FirstName(),
-				City:              faker.Word(),
-				State:             faker.Word(),
-				Zip:               faker.UUIDDigit(),
-				IsShippingAddress: rand.Int()%2 == 0,
-			},
-		},
-	}
-}
 
 func createCustomer(client customer.CustomerClient, customer *customer.CustomerRequest) {
 	resp, err := client.CreateCustomer(context.Background(), customer)
@@ -84,7 +65,7 @@ func do() {
 
 	client := customer.NewCustomerClient(conn)
 
-	createCustomer(client, fakeClient())
+	createCustomer(client, data.FakeClient())
 
 	time.Sleep(3 * time.Second)
 
