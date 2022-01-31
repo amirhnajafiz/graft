@@ -19,6 +19,9 @@ type Server struct {
 
 func (s *Server) CreateCustomer(ctx context.Context, in *customer.CustomerRequest) (*customer.CustomerResponse, error) {
 	s.savedCustomers = append(s.savedCustomers, in)
+
+	log.Println("Customer created")
+
 	return &customer.CustomerResponse{Id: in.Id, Success: true}, nil
 }
 
@@ -39,7 +42,7 @@ func (s *Server) GetCustomers(filter *customer.CustomerFilter, stream customer.C
 func main() {
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Fatalf("failed to listen: %v\n", err)
 	}
 
 	s := grpc.NewServer()
