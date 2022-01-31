@@ -41,7 +41,7 @@ func getCustomers(client customer.CustomerClient, filter *customer.CustomerFilte
 	}
 }
 
-func main() {
+func do() {
 	var conn *grpc.ClientConn
 	var err error
 
@@ -89,6 +89,8 @@ func main() {
 
 	createCustomer(client, temp)
 
+	time.Sleep(2 * time.Second)
+
 	temp = &customer.CustomerRequest{
 		Id:    82,
 		Name:  "Linda",
@@ -105,6 +107,8 @@ func main() {
 		},
 	}
 
+	time.Sleep(1 * time.Second)
+
 	createCustomer(client, temp)
 
 	filter := &customer.CustomerFilter{
@@ -112,4 +116,12 @@ func main() {
 	}
 
 	getCustomers(client, filter)
+}
+
+func main() {
+	for i := 0; i < 5; i++ {
+		go do()
+	}
+
+	time.Sleep(20 * time.Second)
 }
