@@ -2,13 +2,22 @@ package terminal
 
 import (
 	"bufio"
+	"cmd/customer"
+	"cmd/pkg/data"
+	"cmd/pkg/endpoint"
 	"cmd/pkg/reader"
 	"fmt"
+	"google.golang.org/grpc"
 	"log"
 	"os"
 )
 
-func Run() {
+type Terminal struct {
+	Conn   *grpc.ClientConn
+	Client customer.CustomerClient
+}
+
+func (t *Terminal) Run() {
 	flag := false
 	read := reader.Reader{
 		IO: bufio.NewReader(os.Stdin),
@@ -25,11 +34,14 @@ func Run() {
 
 		switch {
 		case command == "CC":
-			// Create customer
+			endpoint.CreateCustomer(t.Client, data.FakeClient())
 		case command == "GC":
-			// Get customers
+			filter := &customer.CustomerFilter{
+				Keyword: "",
+			}
+
+			endpoint.GetCustomers(t.Client, filter)
 		case command == "EX":
-			// Terminate program
 			flag = true
 		}
 
