@@ -3,7 +3,7 @@ package reader
 import "bufio"
 
 type Reader struct {
-	IO bufio.Reader
+	IO *bufio.Reader
 }
 
 var delim byte = 1
