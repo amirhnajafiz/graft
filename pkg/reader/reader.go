@@ -6,10 +6,8 @@ type Reader struct {
 	IO *bufio.Reader
 }
 
-var delim byte = 1
-
 func (r *Reader) Get() (string, error) {
-	text, err := r.IO.ReadString(delim)
+	text, err := r.IO.ReadString('\n')
 	if err != nil {
 		return "", err
 	}
