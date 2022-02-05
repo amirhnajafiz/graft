@@ -1,18 +1,18 @@
 package data
 
 import (
-	"cmd/customer"
+	"cmd/proto"
 	"github.com/bxcodec/faker/v3"
 	"math/rand"
 )
 
-func FakeClient() *customer.CustomerRequest {
-	return &customer.CustomerRequest{
+func FakeClient() *proto.CustomerRequest {
+	return &proto.CustomerRequest{
 		Id:    int32(rand.Int()),
 		Name:  faker.Name(),
 		Email: faker.Email(),
 		Phone: faker.Phonenumber(),
-		Addresses: []*customer.CustomerRequest_Address{
+		Addresses: []*proto.CustomerRequest_Address{
 			{
 				Street:            faker.FirstName(),
 				City:              faker.Word(),

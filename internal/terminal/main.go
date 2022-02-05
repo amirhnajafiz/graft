@@ -2,10 +2,10 @@ package terminal
 
 import (
 	"bufio"
-	"cmd/customer"
 	"cmd/internal/endpoint"
 	"cmd/pkg/data"
 	"cmd/pkg/reader"
+	"cmd/proto"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
@@ -15,7 +15,7 @@ import (
 
 type Terminal struct {
 	Conn   *grpc.ClientConn
-	Client customer.CustomerClient
+	Client proto.CustomerClient
 }
 
 func (t *Terminal) Run() {
@@ -38,7 +38,7 @@ func (t *Terminal) Run() {
 		case command == "create":
 			endpoint.CreateCustomer(t.Client, data.FakeClient())
 		case command == "list":
-			filter := &customer.CustomerFilter{
+			filter := &proto.CustomerFilter{
 				Keyword: "",
 			}
 

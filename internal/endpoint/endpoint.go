@@ -1,13 +1,13 @@
 package endpoint
 
 import (
-	"cmd/customer"
+	"cmd/proto"
 	"context"
 	"io"
 	"log"
 )
 
-func CreateCustomer(client customer.CustomerClient, customer *customer.CustomerRequest) {
+func CreateCustomer(client proto.CustomerClient, customer *proto.CustomerRequest) {
 	resp, err := client.CreateCustomer(context.Background(), customer)
 	if err != nil {
 		log.Fatalf("Could not create Customer: %v\n", err)
@@ -17,7 +17,7 @@ func CreateCustomer(client customer.CustomerClient, customer *customer.CustomerR
 	}
 }
 
-func GetCustomers(client customer.CustomerClient, filter *customer.CustomerFilter) {
+func GetCustomers(client proto.CustomerClient, filter *proto.CustomerFilter) {
 	stream, err := client.GetCustomers(context.Background(), filter)
 	if err != nil {
 		log.Fatalf("Error on get customers: %v\n", err)

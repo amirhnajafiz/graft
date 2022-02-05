@@ -1,7 +1,7 @@
 package main
 
 import (
-	"cmd/customer"
+	"cmd/proto"
 	"cmd/server/handler"
 	"google.golang.org/grpc"
 	"log"
@@ -19,7 +19,7 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	customer.RegisterCustomerServer(s, &handler.Server{})
+	proto.RegisterCustomerServer(s, &handler.Server{})
 	log.Printf("Attemp to listen on: %s", port)
 	err = s.Serve(lis)
 	if err != nil {

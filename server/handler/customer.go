@@ -1,21 +1,21 @@
 package handler
 
 import (
-	"cmd/customer"
+	"cmd/proto"
 	"context"
 	"log"
 	"strings"
 )
 
-func (s *Server) CreateCustomer(ctx context.Context, in *customer.CustomerRequest) (*customer.CustomerResponse, error) {
+func (s *Server) CreateCustomer(ctx context.Context, in *proto.CustomerRequest) (*proto.CustomerResponse, error) {
 	s.savedCustomers = append(s.savedCustomers, in)
 
 	log.Println("Customer created")
 
-	return &customer.CustomerResponse{Id: in.Id, Success: true}, nil
+	return &proto.CustomerResponse{Id: in.Id, Success: true}, nil
 }
 
-func (s *Server) GetCustomers(filter *customer.CustomerFilter, stream customer.Customer_GetCustomersServer) error {
+func (s *Server) GetCustomers(filter *proto.CustomerFilter, stream proto.Customer_GetCustomersServer) error {
 	for _, savedCustomer := range s.savedCustomers {
 		if filter.Keyword != "" {
 			if !strings.Contains(savedCustomer.Name, filter.Keyword) {

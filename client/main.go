@@ -1,8 +1,8 @@
 package main
 
 import (
-	"cmd/customer"
 	terminal2 "cmd/internal/terminal"
+	"cmd/proto"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
@@ -34,7 +34,7 @@ func do() {
 		}
 	}(conn)
 
-	client := customer.NewCustomerClient(conn)
+	client := proto.NewCustomerClient(conn)
 	terminal := terminal2.Terminal{
 		Conn:   conn,
 		Client: client,

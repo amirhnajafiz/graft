@@ -1,7 +1,9 @@
 package handler
 
-import "cmd/customer"
+import (
+	"cmd/proto"
+)
 
 type Server struct {
-	savedCustomers []*customer.CustomerRequest
+	savedCustomers []*proto.CustomerRequest
 }
