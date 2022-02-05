@@ -3,8 +3,8 @@ package terminal
 import (
 	"bufio"
 	"cmd/customer"
+	"cmd/internal/endpoint"
 	"cmd/pkg/data"
-	"cmd/pkg/endpoint"
 	"cmd/pkg/reader"
 	"fmt"
 	"google.golang.org/grpc"

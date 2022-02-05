@@ -2,7 +2,7 @@ package main
 
 import (
 	"cmd/customer"
-	terminal2 "cmd/terminal"
+	terminal2 "cmd/internal/terminal"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
