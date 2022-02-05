@@ -10,6 +10,7 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"os"
+	"time"
 )
 
 type Terminal struct {
@@ -24,7 +25,8 @@ func (t *Terminal) Run() {
 	}
 
 	for {
-		fmt.Print("> ")
+		fmt.Print(time.Now().Format("2006-01-02 15:04:05"))
+		fmt.Print(" >> ")
 
 		command, err := read.Get()
 
@@ -33,15 +35,15 @@ func (t *Terminal) Run() {
 		}
 
 		switch {
-		case command == "CC":
+		case command == "create":
 			endpoint.CreateCustomer(t.Client, data.FakeClient())
-		case command == "GC":
+		case command == "list":
 			filter := &customer.CustomerFilter{
 				Keyword: "",
 			}
 
 			endpoint.GetCustomers(t.Client, filter)
-		case command == "EX":
+		case command == "exit":
 			flag = true
 		}
 
