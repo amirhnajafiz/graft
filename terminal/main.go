@@ -45,6 +45,8 @@ func (t *Terminal) Run() {
 			flag = true
 		}
 
+		fmt.Println()
+
 		if flag {
 			return
 		}

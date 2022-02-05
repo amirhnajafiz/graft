@@ -2,11 +2,14 @@ package reader
 
 import (
 	"bufio"
+	"strings"
 )
 
 type Reader struct {
 	IO *bufio.Reader
 }
+
+var delim = "\n"
 
 func (r *Reader) Get() (string, error) {
 	text, err := r.IO.ReadString('\n')
@@ -14,5 +17,5 @@ func (r *Reader) Get() (string, error) {
 		return "", err
 	}
 
-	return text, nil
+	return strings.Trim(text, delim), nil
 }
