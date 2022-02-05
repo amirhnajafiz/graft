@@ -44,9 +44,5 @@ func do() {
 }
 
 func main() {
-	for i := 0; i < 5; i++ {
-		go do()
-	}
-
-	time.Sleep(20 * time.Second)
+	do()
 }

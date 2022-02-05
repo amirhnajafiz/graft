@@ -1,6 +1,8 @@
 package reader
 
-import "bufio"
+import (
+	"bufio"
+)
 
 type Reader struct {
 	IO *bufio.Reader
