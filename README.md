@@ -84,5 +84,25 @@ data as stream.
 func (s *Server) GetCustomers(filter *proto.CustomerFilter, stream proto.Customer_GetCustomersServer) error
 ```
 
-### What is proto?
+### What is Protocol Buffer?
+Protocol Buffers is Google's language-neutral, platform-neutral, extensible
+mechanism for serializing structured data.
+
+Protobuf is smaller, faster and simpler that provides high performance
+than other standards such as XML and JSON.
+
+By using protocol buffers, you can define your structured data,
+then you generate source code for your choice of programming language using the 
+protocol buffer compiler named **protoc**.
+
 ### What is gRPC?
+gRPC is a high performance, open-source remote procedure call framework
+that can run anywhere.
+
+It enables client and server applications to communicate transparently.
+
+The gPRC framework is developed by Google. It follows HTTP semantics
+over HTTP/2. It also allows you to build services with both
+synchronous and asynchronous communication model.
+
+It supports traditional Request/Response model and bidirectional streams.
