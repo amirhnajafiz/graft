@@ -61,5 +61,28 @@ And you can communicate with terminal UI:
 ```
 
 ### How does it work?
+When you want to create web based APIs, you typically choose RESTful APIs.
+But when you want to build applications for the era of could-native applications
+where our microservices should be able for massive scale and performance is very critical.
+
+In this project, our server is implemented with gRPC that uses protobuf to 
+make a communication between server and client with high performance in time
+and storage.
+
+The customer service provides two kind of RPC methods, a simple RPC
+method named CreateCustomer and a server-side streaming RPC method
+called GetCustomers.
+
+The CreateCustomer generates a new customer, and it executes as a Request/Response paradigm.
+```go
+func (s *Server) CreateCustomer(ctx context.Context, in *proto.CustomerRequest) (*proto.CustomerResponse, error)
+```
+
+The GetCustomers provides list of customers where server provides Customer 
+data as stream.
+```go 
+func (s *Server) GetCustomers(filter *proto.CustomerFilter, stream proto.Customer_GetCustomersServer) error
+```
+
 ### What is proto?
 ### What is gRPC?
