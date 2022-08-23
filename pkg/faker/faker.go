@@ -1,9 +1,10 @@
 package faker
 
 import (
-	"cmd/proto"
-	"github.com/bxcodec/faker/v3"
 	"math/rand"
+
+	"github.com/amirhnajafiz/protocol-buffers/proto"
+	"github.com/bxcodec/faker/v3"
 )
 
 func FakeClient() *proto.CustomerRequest {

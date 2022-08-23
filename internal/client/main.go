@@ -1,21 +1,24 @@
 package main
 
 import (
-	terminal2 "cmd/internal/terminal"
-	"cmd/proto"
 	"fmt"
-	"google.golang.org/grpc"
 	"log"
 	"time"
+
+	"github.com/amirhnajafiz/protocol-buffers/internal/terminal"
+	"github.com/amirhnajafiz/protocol-buffers/proto"
+	"google.golang.org/grpc"
 )
 
 const (
 	address = "localhost:8080"
 )
 
-func do() {
-	var conn *grpc.ClientConn
-	var err error
+func main() {
+	var (
+		conn *grpc.ClientConn
+		err  error
+	)
 
 	for {
 		conn, err = grpc.Dial(address, grpc.WithInsecure())
@@ -35,14 +38,10 @@ func do() {
 	}(conn)
 
 	client := proto.NewCustomerClient(conn)
-	terminal := terminal2.Terminal{
+	tr := terminal.Terminal{
 		Conn:   conn,
 		Client: client,
 	}
 
-	terminal.Run()
-}
-
-func main() {
-	do()
+	tr.Run()
 }
