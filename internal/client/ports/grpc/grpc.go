@@ -8,6 +8,7 @@ import (
 	"github.com/amirhnajafiz/protocol-buffers/proto"
 )
 
+// CreateCustomer just like the method in server.
 func CreateCustomer(client proto.CustomerClient, customer *proto.CustomerRequest) {
 	resp, err := client.CreateCustomer(context.Background(), customer)
 	if err != nil {
@@ -19,6 +20,7 @@ func CreateCustomer(client proto.CustomerClient, customer *proto.CustomerRequest
 	}
 }
 
+// GetCustomers just like the method in server.
 func GetCustomers(client proto.CustomerClient, filter *proto.CustomerFilter) {
 	stream, err := client.GetCustomers(context.Background(), filter)
 	if err != nil {
@@ -27,10 +29,11 @@ func GetCustomers(client proto.CustomerClient, filter *proto.CustomerFilter) {
 
 	for {
 		rec, err := stream.Recv()
-		if err == io.EOF {
-			break
-		}
 		if err != nil {
+			if err == io.EOF {
+				break
+			}
+
 			log.Fatalf("%v.GetCustomers(_) = _, %v\n", client, err)
 		}
 

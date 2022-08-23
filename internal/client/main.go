@@ -12,6 +12,7 @@ import (
 
 const (
 	address = "localhost:8080"
+	timeout = 2
 )
 
 func main() {
@@ -20,16 +21,18 @@ func main() {
 		err  error
 	)
 
+	// connecting to grpc server
 	for {
-		conn, err = grpc.Dial(address, grpc.WithInsecure())
+		conn, err = grpc.Dial(address)
 		if err != nil {
-			time.Sleep(2 * time.Second)
+			time.Sleep(timeout * time.Second)
 			fmt.Printf("Did not connect: %v", err)
 		} else {
 			break
 		}
 	}
 
+	// closing our grpc connection
 	defer func(conn *grpc.ClientConn) {
 		err := conn.Close()
 		if err != nil {
@@ -37,11 +40,12 @@ func main() {
 		}
 	}(conn)
 
+	// now we create a new customer and begin
 	client := proto.NewCustomerClient(conn)
 	tr := terminal.Terminal{
-		Conn:   conn,
 		Client: client,
 	}
 
+	// start terminal
 	tr.Run()
 }

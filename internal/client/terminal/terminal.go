@@ -11,11 +11,11 @@ import (
 	"github.com/amirhnajafiz/protocol-buffers/pkg/faker"
 	"github.com/amirhnajafiz/protocol-buffers/pkg/reader"
 	"github.com/amirhnajafiz/protocol-buffers/proto"
-	"google.golang.org/grpc"
 )
 
+// Terminal is our user interface
+// to get and receive data over terminal.
 type Terminal struct {
-	Conn   *grpc.ClientConn
 	Client proto.CustomerClient
 }
 
