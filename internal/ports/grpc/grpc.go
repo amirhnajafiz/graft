@@ -1,10 +1,11 @@
-package endpoint
+package grpc
 
 import (
-	"cmd/proto"
 	"context"
 	"io"
 	"log"
+
+	"github.com/amirhnajafiz/protocol-buffers/proto"
 )
 
 func CreateCustomer(client proto.CustomerClient, customer *proto.CustomerRequest) {
@@ -12,6 +13,7 @@ func CreateCustomer(client proto.CustomerClient, customer *proto.CustomerRequest
 	if err != nil {
 		log.Fatalf("Could not create Customer: %v\n", err)
 	}
+
 	if resp.Success {
 		log.Printf("A new Customer has been added with id: %d\n", resp.Id)
 	}
@@ -22,6 +24,7 @@ func GetCustomers(client proto.CustomerClient, filter *proto.CustomerFilter) {
 	if err != nil {
 		log.Fatalf("Error on get customers: %v\n", err)
 	}
+
 	for {
 		rec, err := stream.Recv()
 		if err == io.EOF {
@@ -30,6 +33,7 @@ func GetCustomers(client proto.CustomerClient, filter *proto.CustomerFilter) {
 		if err != nil {
 			log.Fatalf("%v.GetCustomers(_) = _, %v\n", client, err)
 		}
+
 		log.Printf("Customer: %v\n", rec)
 	}
 }
