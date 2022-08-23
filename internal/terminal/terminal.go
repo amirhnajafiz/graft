@@ -2,15 +2,16 @@ package terminal
 
 import (
 	"bufio"
-	"cmd/internal/endpoint"
-	"cmd/pkg/data"
-	"cmd/pkg/reader"
-	"cmd/proto"
 	"fmt"
-	"google.golang.org/grpc"
 	"log"
 	"os"
 	"time"
+
+	pgrpc "github.com/amirhnajafiz/protocol-buffers/internal/ports/grpc"
+	"github.com/amirhnajafiz/protocol-buffers/pkg/faker"
+	"github.com/amirhnajafiz/protocol-buffers/pkg/reader"
+	"github.com/amirhnajafiz/protocol-buffers/proto"
+	"google.golang.org/grpc"
 )
 
 type Terminal struct {
@@ -36,13 +37,13 @@ func (t *Terminal) Run() {
 
 		switch {
 		case command == "create":
-			endpoint.CreateCustomer(t.Client, data.FakeClient())
+			pgrpc.CreateCustomer(t.Client, faker.FakeClient())
 		case command == "list":
 			filter := &proto.CustomerFilter{
 				Keyword: "",
 			}
 
-			endpoint.GetCustomers(t.Client, filter)
+			pgrpc.GetCustomers(t.Client, filter)
 		case command == "exit":
 			flag = true
 		}
