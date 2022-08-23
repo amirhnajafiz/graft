@@ -1,11 +1,11 @@
 package main
 
 import (
-	"cmd/proto"
-	"cmd/server/handler"
-	"google.golang.org/grpc"
 	"log"
 	"net"
+
+	"github.com/amirhnajafiz/protocol-buffers/proto"
+	"google.golang.org/grpc"
 )
 
 const (
@@ -19,10 +19,12 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	proto.RegisterCustomerServer(s, &handler.Server{})
+
+	proto.RegisterCustomerServer(s, &server{})
+
 	log.Printf("Attemp to listen on: %s", port)
-	err = s.Serve(lis)
-	if err != nil {
+
+	if err = s.Serve(lis); err != nil {
 		log.Fatalf("failed to create server: %v", err)
 	}
 }
