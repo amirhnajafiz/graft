@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	pgrpc "github.com/amirhnajafiz/protocol-buffers/internal/ports/grpc"
+	pgrpc "github.com/amirhnajafiz/protocol-buffers/internal/client/ports/grpc"
 	"github.com/amirhnajafiz/protocol-buffers/pkg/faker"
 	"github.com/amirhnajafiz/protocol-buffers/pkg/reader"
 	"github.com/amirhnajafiz/protocol-buffers/proto"

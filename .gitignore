@@ -16,4 +16,5 @@
 
 # Custome ignores
 .idea/
+.vsdoce/
 .DS_Store

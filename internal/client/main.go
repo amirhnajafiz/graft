@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/amirhnajafiz/protocol-buffers/internal/terminal"
+	"github.com/amirhnajafiz/protocol-buffers/internal/client/terminal"
 	"github.com/amirhnajafiz/protocol-buffers/proto"
 	"google.golang.org/grpc"
 )
