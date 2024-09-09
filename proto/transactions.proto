@@ -1,0 +1,23 @@
+syntax = "proto3";
+package transactions;
+
+option go_package = "../pkg/rpc/transactions";
+
+// transactions service definition. it is used for defining transactions methods.
+service Transactions {
+  rpc GetTransaction(Transaction) returns (Transaction) {}
+  rpc NewTransaction(Transaction) returns (Transaction) {}
+}
+
+// transaction message type.
+message Transaction {
+  int64 tid = 1;
+  float amount = 2;
+  string source = 3;
+  string destination = 4;
+}
+
+// transaction response message type.
+message TransactionResponse {
+  int64 tid = 1;
+}
