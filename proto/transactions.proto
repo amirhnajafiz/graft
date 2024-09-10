@@ -19,7 +19,7 @@ enum TransactionType {
 // services:
 // transactions service definition. it is used for defining transactions methods.
 service Transactions {
-  rpc GetTransaction(Transaction) returns (Transaction) {}
+  rpc QueryTransactions(Transaction) returns (stream Transaction) {}
   rpc NewTransaction(Transaction) returns (Transaction.TransactionResponse) {}
 }
 
