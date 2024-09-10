@@ -45,7 +45,8 @@ message TransactionQuery {
   repeated int64 tids = 1;
   repeated string sources = 2;
   repeated string destinations = 3;
-  repeated string timestamps = 5;
-  TransactionStatus status = 6;
-  TransactionType ttype = 7;
+  string timestamp_before = 5;
+  string timestamp_after = 6;
+  TransactionStatus status = 7;
+  TransactionType ttype = 8;
 }
