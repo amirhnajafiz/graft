@@ -1,6 +1,6 @@
 module github.com/amirhnajafiz/protocol-buffers
 
-go 1.17
+go 1.22
 
 require (
 	github.com/bxcodec/faker/v3 v3.7.0
