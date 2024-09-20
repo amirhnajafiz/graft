@@ -7,3 +7,7 @@ type LocalStorage interface {
 	Put(key string, value interface{})
 	Fetch(key string) interface{}
 }
+
+func NewLocalStorage() LocalStorage {
+	return make(memory)
+}
