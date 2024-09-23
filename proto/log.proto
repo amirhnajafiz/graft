@@ -1,0 +1,28 @@
+syntax = "proto3";
+package logs;
+
+option go_package = "../pkg/rpc/logs";
+
+enum Status {
+  STATUS_REQUESTED = 0;
+  STATUS_COMITTED = 1;
+}
+
+service Logs {
+  rpc Vote(stream Log) returns (VoteResult) {}
+  rpc Request(Log) returns (RequestResult) {}
+}
+
+message VoteResult {
+  bool result = 1;
+}
+
+message RequestResult {
+  Status status = 1;
+}
+
+message Log {
+  int64 term = 1;
+  int64 index = 2;
+  string command = 3;
+}
