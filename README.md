@@ -1,5 +1,3 @@
-# GRAFT
+# Starling
 
-A gRPC based plugin to add distributed consensus system to your applications. Let's say you have a replicated web-server, and you need to shared some consensus value between them. In that case, GRAFT helps by providing HTTP APIs to share your values using RAFT protocol.
-
-Instead of using message-brokers and unrelaiable heavy systems, GRAFT is a light super fast consensus sharing system to exchange states between your applications.
+Starling is a fast, lightweight distributed state-sharing system, written in Go. It uses the RAFT consensus algorithm to reliably synchronize values and state across applications and services. Designed for simplicity, speed, and cloud-native environments, Starling makes it easy to coordinate distributed workloads and share configuration or ephemeral state with minimal overhead.
